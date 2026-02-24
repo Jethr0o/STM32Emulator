@@ -1,0 +1,16 @@
+# Carica l'infrastruttura hardware
+mach create "STM32H757_Riverdi"
+machine LoadPlatformDescription @board_futuro_solare.repl
+
+# Apri la finestra video per il display
+showAnalyzer display
+
+# Abilita il server GDB per il debugging dal tuo IDE (es. porta 3333 per il core M7)
+machine StartGdbServer 3333 true cpu_m7
+
+# Carica il firmware (il file .elf compilato col tuo toolchain C/C++)
+# Sostituisci con il percorso reale del tuo firmware
+sysbus LoadELF @percorso/al/tuo/firmware_m7.elf
+
+# Avvia l'esecuzione
+start

@@ -1,0 +1,30 @@
+// Definizione dei Core
+cpu_m7: CPU.CortexM @ sysbus
+    cpuType: "cortex-m7"
+    nvic: nvic
+
+cpu_m4: CPU.CortexM @ sysbus
+    cpuType: "cortex-m4"
+    nvic: nvic
+
+// Controller degli Interrupt
+nvic: IRQControllers.NVIC @ sysbus 0xE000E000
+    IRQPriorities: 16
+
+// Memoria RAM (AXI SRAM mappata all'indirizzo previsto dal datasheet)
+sram: Memory.MappedMemory @ sysbus 0x24000000
+    size: 0x80000
+
+// Flash Memory
+flash: Memory.MappedMemory @ sysbus 0x08000000
+    size: 0x200000
+
+// EMULAZIONE DEL DISPLAY RIVERDI
+// Diciamo a Renode di interpretare un'area di memoria come i pixel dello schermo.
+// Mappiamo il framebuffer in coda alla SRAM o in una SDRAM esterna.
+display: Video.PixelBuffer @ sysbus 0x24040000
+    width: 800
+    height: 480
+    format: PixelFormat.RGB565
+
+
