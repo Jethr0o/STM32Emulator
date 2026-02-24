@@ -1,16 +1,28 @@
-// SDL libraries for rendering UI of Riverdi's display
+// SDL and LVGL libraries for rendering UI of Riverdi's display
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "lvgl"
+
 #include <stdlib.h>
 
-void imageLoop();
+#include "headers/utils.h"
 
 int main(){
-	printf("Flavio Miccichè\n");
-	return 0;
+	
+	if(_initAll_() == 0)
+		imageLoop();
+	else
+		return EXIT_FAILURE;
+
+	return EXIT_SUCCESS;
 }
 
+
+static uint8_t _initAll_(){
+
+	return EXIT_SUCCESS
+}
 
 void imageLoop(){
 

@@ -22,9 +22,11 @@ flash: Memory.MappedMemory @ sysbus 0x08000000
 // EMULAZIONE DEL DISPLAY RIVERDI
 // Diciamo a Renode di interpretare un'area di memoria come i pixel dello schermo.
 // Mappiamo il framebuffer in coda alla SRAM o in una SDRAM esterna.
-display: Video.PixelBuffer @ sysbus 0x24040000
-    width: 800
-    height: 480
-    format: PixelFormat.RGB565
+display:6 Video.PixelBuffer @ sysbus 0x24040000
+    width: 1024
+    height: 600 
+    format: PixelFormat.RGB56
 
+
+driver:
 
