@@ -8,6 +8,8 @@ static void imageLoop();
 static uint8_t _initAll_();
 
 // Error of the init
+/*
 enum commonErrors{
 
 };
+*/

@@ -1,16 +1,29 @@
-# Carica l'infrastruttura hardware
-mach create "STM32H757_Riverdi"
-machine LoadPlatformDescription @board_futuro_solare.repl
+# 1. Crea la board e carica i componenti
+mach create "STM32H757_FuturoSolare"
+machine LoadPlatformDescription @scheda_futuro_solare.repl
 
-# Apri la finestra video per il display
-showAnalyzer display
+# 2. Setup CAN Bus per i test di telemetria
+emulation CreateCANHub "telemetria_hub"
+connector Connect sysbus.fdcan1 telemetria_hub
 
-# Abilita il server GDB per il debugging dal tuo IDE (es. porta 3333 per il core M7)
-machine StartGdbServer 3333 true cpu_m7
+# 3. Avvia l'interfaccia grafica
+showAnalyzer sysbus.display
 
-# Carica il firmware (il file .elf compilato col tuo toolchain C/C++)
-# Sostituisci con il percorso reale del tuo firmware
-sysbus LoadELF @percorso/al/tuo/firmware_m7.elf
+# 4. Abilita il debugger (Porta 3333)
+machine StartGdbServer 3333
 
-# Avvia l'esecuzione
+# 5. Caricamento Firmware C/C++
+# Sostituisci il nome con il tuo vero file compialto da STM32CubeIDE
+$bin?=@firmware_ui.elf
+
+macro reset
+"""
+    sysbus LoadELF $bin
+"""
+
+# Esegue la macro di reset e si prepara a partire
+runMacro $reset
+
+# Avvia l'emulatore
+echo "Emulatore pronto. In attesa del debugger sulla porta 3333 o avvio automatico..."
 start
