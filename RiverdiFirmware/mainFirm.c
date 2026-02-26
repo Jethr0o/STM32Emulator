@@ -5,21 +5,26 @@
 #include <stdlib.h>
 
 #include "headers/utils.h"
-#include "headers/lvgl/lvgl.h"
+#include "lv_conf.h"
+#include "lvgl.h"
+
+
 
 int main(){
-	
-	if(_initAll_() == 0)
-		imageLoop();
-	else
-		return EXIT_FAILURE;
-
+	_initAll_();	
+	//if(_initAll_() == 0){
+		//imageLoop();
+	lv_example_style_7();
+	//}else{
+	//	return EXIT_FAILURE;
+	//}
 	return EXIT_SUCCESS;
 }
 
 
 static uint8_t _initAll_(){
-
+	lv_init();
+	lv_display_t * lvRiverdiDisp = lv_sdl_window_create(RIVERDI_SCREEN_WIDTH, RIVERDI_SCREEN_HEIGHT);
 	return EXIT_SUCCESS;
 }
 
@@ -32,7 +37,7 @@ void imageLoop(){
 }
 
 
-#include "headers/lvgl/examples/lv_examples.h"
+#include "lvgl/examples/lv_examples.h"
 #if LV_BUILD_EXAMPLES && LV_USE_ARC
 
 /**
